@@ -5,18 +5,18 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.tentac</groupId>
-    <artifactId>swagger2md-parent</artifactId>
+    <artifactId>tentac-parent</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>Swagger2md Parent</name>
+    <name>Tentac Parent</name>
     <description>Markdown-format API documentation generator compatible with Swagger2, optimized for LLM integration</description>
 
     <modules>
-        <module>swagger2md-core</module>
-        <module>swagger2md-spring-boot-starter</module>
-        <module>swagger2md-demo</module>
-        <module>swagger2md-demo-standalone</module>
+        <module>tentac-core</module>
+        <module>tentac-spring-boot-starter</module>
+        <module>tentac-demo</module>
+        <module>tentac-demo-standalone</module>
     </modules>
 
     <properties>
@@ -57,12 +57,12 @@
             </dependency>
             <dependency>
                 <groupId>com.github.tentac</groupId>
-                <artifactId>swagger2md-core</artifactId>
+                <artifactId>tentac-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.tentac</groupId>
-                <artifactId>swagger2md-spring-boot-starter</artifactId>
+                <artifactId>tentac-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>
