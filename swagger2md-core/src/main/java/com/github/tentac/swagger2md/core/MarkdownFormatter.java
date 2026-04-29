@@ -106,22 +106,26 @@ public class MarkdownFormatter {
             sb.append("**Produces:** ").append(String.join(", ", endpoint.getProduces())).append("\n\n");
         }
 
-        // Parameters table
+        // Parameters table (query, path, header params only - body is shown separately)
         formatParameters(sb, endpoint.getParameters());
 
-        // Request Body
+        // Request Body (shown as JSON)
         if (endpoint.getRequestBodyType() != null && !endpoint.getRequestBodyType().isEmpty()) {
             sb.append("**Request Body:** `").append(endpoint.getRequestBodyType()).append("`\n\n");
             if (endpoint.getRequestBodyExample() != null && !endpoint.getRequestBodyExample().isEmpty()) {
                 sb.append("```json\n").append(endpoint.getRequestBodyExample()).append("\n```\n\n");
+            } else {
+                sb.append("\n");
             }
         }
 
-        // Response
+        // Response Body (shown as JSON)
         if (endpoint.getResponseType() != null && !endpoint.getResponseType().isEmpty()) {
             sb.append("**Response:** `").append(endpoint.getResponseType()).append("`\n\n");
             if (endpoint.getResponseExample() != null && !endpoint.getResponseExample().isEmpty()) {
                 sb.append("```json\n").append(endpoint.getResponseExample()).append("\n```\n\n");
+            } else {
+                sb.append("\n");
             }
         }
 

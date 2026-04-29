@@ -6,6 +6,8 @@ import com.github.tentac.swagger2md.model.ParameterInfo;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -23,6 +25,8 @@ public class ApiScanner {
             RequestMapping.class, GetMapping.class, PostMapping.class,
             PutMapping.class, DeleteMapping.class, PatchMapping.class
     );
+
+    private final JsonExampleGenerator jsonExampleGenerator = new JsonExampleGenerator();
 
     /**
      * Scan a controller class and extract all endpoint information.
@@ -231,11 +235,41 @@ public class ApiScanner {
 
         // Extract parameters
         Parameter[] methodParams = method.getParameters();
+        List<ParameterInfo> bodyParams = new ArrayList<>();
         for (int i = 0; i < methodParams.length; i++) {
             Parameter param = methodParams[i];
             ParameterInfo paramInfo = extractParameter(param, i);
             if (paramInfo != null) {
-                endpoint.getParameters().add(paramInfo);
+                if ("body".equals(paramInfo.getIn())) {
+                    bodyParams.add(paramInfo);
+                } else {
+                    endpoint.getParameters().add(paramInfo);
+                }
+            }
+        }
+
+        // Generate JSON example for request body (take first body param)
+        if (!bodyParams.isEmpty()) {
+            ParameterInfo bodyParam = bodyParams.get(0);
+            endpoint.setRequestBodyType(bodyParam.getType());
+            // Try to find the actual parameter type from the method
+            Class<?> bodyClass = findBodyParamClass(method);
+            if (bodyClass != null) {
+                String jsonExample = jsonExampleGenerator.generateJsonExample(bodyClass);
+                if (jsonExample != null) {
+                    endpoint.setRequestBodyExample(jsonExample);
+                }
+            }
+        }
+
+        // Generate JSON example for response body
+        Class<?> returnType = method.getReturnType();
+        if (returnType != void.class && returnType != Void.class) {
+            String responseTypeName = getReturnTypeName(method);
+            endpoint.setResponseType(responseTypeName);
+            String jsonExample = jsonExampleGenerator.generateJsonExample(method.getGenericReturnType());
+            if (jsonExample != null) {
+                endpoint.setResponseExample(jsonExample);
             }
         }
 
@@ -318,5 +352,48 @@ public class ApiScanner {
             path = "/" + path;
         }
         return path;
+    }
+
+    /**
+     * Find the class of the @RequestBody parameter in the method.
+     */
+    private Class<?> findBodyParamClass(Method method) {
+        for (Parameter param : method.getParameters()) {
+            if (param.getAnnotation(RequestBody.class) != null) {
+                return param.getType();
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Get a human-readable return type name, handling generics like List&lt;User&gt;.
+     */
+    private String getReturnTypeName(Method method) {
+        Type genericReturnType = method.getGenericReturnType();
+        if (genericReturnType instanceof ParameterizedType paramType) {
+            Type rawType = paramType.getRawType();
+            Type[] typeArgs = paramType.getActualTypeArguments();
+            StringBuilder sb = new StringBuilder();
+            if (rawType instanceof Class<?> rawClass) {
+                sb.append(rawClass.getSimpleName());
+            } else {
+                sb.append(rawType.getTypeName());
+            }
+            if (typeArgs.length > 0) {
+                sb.append("<");
+                for (int i = 0; i < typeArgs.length; i++) {
+                    if (i > 0) sb.append(", ");
+                    if (typeArgs[i] instanceof Class<?> argClass) {
+                        sb.append(argClass.getSimpleName());
+                    } else {
+                        sb.append(typeArgs[i].getTypeName());
+                    }
+                }
+                sb.append(">");
+            }
+            return sb.toString();
+        }
+        return method.getReturnType().getSimpleName();
     }
 }
