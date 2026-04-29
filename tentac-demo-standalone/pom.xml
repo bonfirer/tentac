@@ -16,6 +16,10 @@
     <name>Tentac Demo Standalone</name>
     <description>Demo showing Tentac working WITHOUT Swagger2 annotations on classpath</description>
 
+    <properties>
+        <maven.deploy.skip>true</maven.deploy.skip>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.github.bonfirer</groupId>

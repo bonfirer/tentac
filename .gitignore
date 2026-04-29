@@ -5,6 +5,7 @@ target/
 *.ear
 
 # IDE files
+.qoder/
 .idea/
 *.iml
 .vscode/

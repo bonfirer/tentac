@@ -16,6 +16,10 @@
     <name>Tentac Demo</name>
     <description>Demo application showcasing Tentac Markdown API documentation</description>
 
+    <properties>
+        <maven.deploy.skip>true</maven.deploy.skip>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.github.bonfirer</groupId>
