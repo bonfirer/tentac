@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Filter that controls access to Swagger2md endpoints based on
+ * Filter that controls access to Tentac endpoints based on
  * IP whitelist/blacklist with CIDR notation support.
  */
 public class IpAccessFilter extends OncePerRequestFilter {

@@ -3,14 +3,14 @@ server:
 
 spring:
   application:
-    name: swagger2md-demo-standalone
+    name: tentac-demo-standalone
 
 tentac:
   enabled: true
   title: "Standalone Demo API (No Swagger2)"
   description: "This API is documented using ONLY @MarkdownApi annotations - zero Swagger2 dependency"
   version: "1.0.0"
-  base-package: "com.github.tentac.swagger2md.demo.standalone"
+  base-package: "com.github.tentac.demo.standalone"
   llm-probe-enabled: true
   ip-whitelist:
     - "127.0.0.1/32"

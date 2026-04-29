@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * REST controller exposing Swagger2md documentation endpoints.
+ * REST controller exposing Tentac documentation endpoints.
  * Paths are configurable via TentacProperties.
  */
 @RestController
@@ -40,7 +40,7 @@ public class TentacEndpoint {
     /**
      * Serve full Markdown API documentation.
      */
-    @GetMapping(value = "${swagger2md.markdown-path:/v2/markdown}",
+    @GetMapping(value = "${tentac.markdown-path:/v2/markdown}",
                 produces = "text/markdown;charset=UTF-8")
     public String getMarkdown() {
         return generator.generate(applicationContext);
@@ -49,7 +49,7 @@ public class TentacEndpoint {
     /**
      * Serve LLM-optimized probe output.
      */
-    @GetMapping(value = "${swagger2md.llm-probe-path:/v2/llm-probe}",
+    @GetMapping(value = "${tentac.llm-probe-path:/v2/llm-probe}",
                 produces = "text/markdown;charset=UTF-8")
     public String getLlmProbe() {
         List<EndpointInfo> endpoints = generator.getEndpoints(applicationContext);
@@ -63,7 +63,7 @@ public class TentacEndpoint {
     /**
      * Serve raw JSON probe output for programmatic consumption by LLMs.
      */
-    @GetMapping(value = "${swagger2md.llm-probe-path:/v2/llm-probe}/json",
+    @GetMapping(value = "${tentac.llm-probe-path:/v2/llm-probe}/json",
                 produces = MediaType.APPLICATION_JSON_VALUE)
     public List<EndpointInfo> getLlmProbeJson() {
         return generator.getEndpoints(applicationContext);

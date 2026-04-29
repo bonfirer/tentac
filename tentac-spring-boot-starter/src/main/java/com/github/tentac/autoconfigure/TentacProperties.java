@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Configuration properties for Swagger2md.
+ * Configuration properties for Tentac.
  * Prefix: swagger2md
  */
 @ConfigurationProperties(prefix = "tentac")
 public class TentacProperties {
 
-    /** Enable or disable Swagger2md */
+    /** Enable or disable Tentac */
     private boolean enabled = true;
 
     /** API title for documentation header */

@@ -14,8 +14,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Auto-configuration for Swagger2md.
- * Registers all necessary beans when swagger2md.enabled=true.
+ * Auto-configuration for Tentac.
+ * Registers all necessary beans when tentac.enabled=true.
  */
 @AutoConfiguration
 @EnableConfigurationProperties(TentacProperties.class)
@@ -46,7 +46,7 @@ public class TentacAutoConfiguration {
     }
 
     /**
-     * Register IP access filter for Swagger2md endpoints.
+     * Register IP access filter for Tentac endpoints.
      * Only registered when whitelist or blacklist is configured.
      */
     @Bean

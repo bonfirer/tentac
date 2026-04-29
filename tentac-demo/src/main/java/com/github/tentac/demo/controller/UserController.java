@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Sample User REST controller with both Swagger2 and Swagger2md annotations.
+ * Sample User REST controller with both Swagger2 and Tentac annotations.
  * Demonstrates compatibility with existing Swagger2 annotated controllers.
  */
 @RestController

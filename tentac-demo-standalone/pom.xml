@@ -34,7 +34,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.github.tentac.swagger2md.demo.standalone.StandaloneDemoApplication</mainClass>
+                    <mainClass>com.github.tentac.demo.standalone.StandaloneDemoApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>
