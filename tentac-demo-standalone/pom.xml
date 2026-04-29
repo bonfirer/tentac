@@ -34,7 +34,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.github.tentac.demo.standalone.StandaloneDemoApplication</mainClass>
+                    <mainClass>com.github.bonfirer.tentac.demo.standalone.StandaloneDemoApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>
