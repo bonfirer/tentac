@@ -259,6 +259,9 @@ public class ApiScanner {
                 if (jsonExample != null) {
                     endpoint.setRequestBodyExample(jsonExample);
                 }
+                // Extract field descriptions from @ApiModelProperty annotations
+                List<ParameterInfo> fieldDescs = jsonExampleGenerator.extractFieldDescriptions(bodyClass);
+                endpoint.setRequestBodyFields(fieldDescs);
             }
         }
 
@@ -270,6 +273,14 @@ public class ApiScanner {
             String jsonExample = jsonExampleGenerator.generateJsonExample(method.getGenericReturnType());
             if (jsonExample != null) {
                 endpoint.setResponseExample(jsonExample);
+            }
+            // Extract field descriptions for response
+            Class<?> responseElementType = jsonExampleGenerator.getElementType(method.getGenericReturnType());
+            if (responseElementType != null) {
+                List<ParameterInfo> fieldDescs = jsonExampleGenerator.extractFieldDescriptions(responseElementType);
+                if (!fieldDescs.isEmpty()) {
+                    endpoint.setResponseBodyFields(fieldDescs);
+                }
             }
         }
 

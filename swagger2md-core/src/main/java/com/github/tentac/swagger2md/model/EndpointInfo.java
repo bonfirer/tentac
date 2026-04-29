@@ -50,6 +50,12 @@ public class EndpointInfo {
     /** Operation ID for unique identification */
     private String operationId;
 
+    /** Field descriptions for request body model (from @ApiModelProperty) */
+    private List<ParameterInfo> requestBodyFields = new ArrayList<>();
+
+    /** Field descriptions for response body model (from @ApiModelProperty) */
+    private List<ParameterInfo> responseBodyFields = new ArrayList<>();
+
     public String getHttpMethod() {
         return httpMethod;
     }
@@ -160,5 +166,21 @@ public class EndpointInfo {
 
     public void setOperationId(String operationId) {
         this.operationId = operationId;
+    }
+
+    public List<ParameterInfo> getRequestBodyFields() {
+        return requestBodyFields;
+    }
+
+    public void setRequestBodyFields(List<ParameterInfo> requestBodyFields) {
+        this.requestBodyFields = requestBodyFields;
+    }
+
+    public List<ParameterInfo> getResponseBodyFields() {
+        return responseBodyFields;
+    }
+
+    public void setResponseBodyFields(List<ParameterInfo> responseBodyFields) {
+        this.responseBodyFields = responseBodyFields;
     }
 }

@@ -109,21 +109,53 @@ public class MarkdownFormatter {
         // Parameters table (query, path, header params only - body is shown separately)
         formatParameters(sb, endpoint.getParameters());
 
-        // Request Body (shown as JSON)
+        // Request Body (shown as JSON with field description table)
         if (endpoint.getRequestBodyType() != null && !endpoint.getRequestBodyType().isEmpty()) {
             sb.append("**Request Body:** `").append(endpoint.getRequestBodyType()).append("`\n\n");
             if (endpoint.getRequestBodyExample() != null && !endpoint.getRequestBodyExample().isEmpty()) {
                 sb.append("```json\n").append(endpoint.getRequestBodyExample()).append("\n```\n\n");
+            }
+            // Field description table
+            if (endpoint.getRequestBodyFields() != null && !endpoint.getRequestBodyFields().isEmpty()) {
+                sb.append("**Fields:**\n\n");
+                sb.append("| Field | Type | Required | Description | Example |\n");
+                sb.append("|-------|------|----------|-------------|--------|\n");
+                for (ParameterInfo field : endpoint.getRequestBodyFields()) {
+                    sb.append("| `")
+                            .append(escapeMarkdown(field.getName())).append("` | ")
+                            .append(field.getType() != null ? field.getType() : "").append(" | ")
+                            .append(field.isRequired() ? "Yes" : "No").append(" | ")
+                            .append(field.getDescription() != null ? escapeMarkdown(field.getDescription()) : "").append(" | ")
+                            .append(field.getExample() != null ? escapeMarkdown(field.getExample()) : "")
+                            .append(" |\n");
+                }
+                sb.append("\n");
             } else {
                 sb.append("\n");
             }
         }
 
-        // Response Body (shown as JSON)
+        // Response Body (shown as JSON with field description table)
         if (endpoint.getResponseType() != null && !endpoint.getResponseType().isEmpty()) {
             sb.append("**Response:** `").append(endpoint.getResponseType()).append("`\n\n");
             if (endpoint.getResponseExample() != null && !endpoint.getResponseExample().isEmpty()) {
                 sb.append("```json\n").append(endpoint.getResponseExample()).append("\n```\n\n");
+            }
+            // Field description table
+            if (endpoint.getResponseBodyFields() != null && !endpoint.getResponseBodyFields().isEmpty()) {
+                sb.append("**Fields:**\n\n");
+                sb.append("| Field | Type | Required | Description | Example |\n");
+                sb.append("|-------|------|----------|-------------|--------|\n");
+                for (ParameterInfo field : endpoint.getResponseBodyFields()) {
+                    sb.append("| `")
+                            .append(escapeMarkdown(field.getName())).append("` | ")
+                            .append(field.getType() != null ? field.getType() : "").append(" | ")
+                            .append(field.isRequired() ? "Yes" : "No").append(" | ")
+                            .append(field.getDescription() != null ? escapeMarkdown(field.getDescription()) : "").append(" | ")
+                            .append(field.getExample() != null ? escapeMarkdown(field.getExample()) : "")
+                            .append(" |\n");
+                }
+                sb.append("\n");
             } else {
                 sb.append("\n");
             }

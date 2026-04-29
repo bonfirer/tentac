@@ -1,0 +1,21 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: swagger2md-demo-standalone
+
+swagger2md:
+  enabled: true
+  title: "Standalone Demo API (No Swagger2)"
+  description: "This API is documented using ONLY @MarkdownApi annotations - zero Swagger2 dependency"
+  version: "1.0.0"
+  base-package: "com.github.tentac.swagger2md.demo.standalone"
+  llm-probe-enabled: true
+  ip-whitelist:
+    - "127.0.0.1/32"
+    - "0:0:0:0:0:0:0:1/128"
+
+logging:
+  level:
+    com.github.tentac.swagger2md: INFO

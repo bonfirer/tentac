@@ -108,21 +108,51 @@ public class LlmProbeGenerator {
                     }
                 }
 
-                // Request Body (shown as JSON)
+                // Request Body (shown as JSON with field descriptions)
                 if (endpoint.getRequestBodyType() != null && !endpoint.getRequestBodyType().isEmpty()) {
                     sb.append("- **Request Body:** `").append(endpoint.getRequestBodyType()).append("`\n");
                     if (endpoint.getRequestBodyExample() != null && !endpoint.getRequestBodyExample().isEmpty()) {
                         String indentedJson = indentJson(endpoint.getRequestBodyExample(), "    ");
                         sb.append("  ```json\n").append(indentedJson).append("\n  ```\n");
                     }
+                    // Field descriptions
+                    if (endpoint.getRequestBodyFields() != null && !endpoint.getRequestBodyFields().isEmpty()) {
+                        sb.append("  **Fields:**\n");
+                        for (ParameterInfo field : endpoint.getRequestBodyFields()) {
+                            sb.append("  - `").append(field.getName()).append("`")
+                                    .append(" (").append(field.getType() != null ? field.getType() : "?").append(")");
+                            if (field.getDescription() != null && !field.getDescription().isEmpty()) {
+                                sb.append(" - ").append(field.getDescription());
+                            }
+                            if (field.getExample() != null && !field.getExample().isEmpty()) {
+                                sb.append(" (e.g. `").append(field.getExample()).append("`)");
+                            }
+                            sb.append("\n");
+                        }
+                    }
                 }
 
-                // Response Body (shown as JSON)
+                // Response Body (shown as JSON with field descriptions)
                 if (endpoint.getResponseType() != null && !endpoint.getResponseType().isEmpty()) {
                     sb.append("- **Response:** `").append(endpoint.getResponseType()).append("`\n");
                     if (endpoint.getResponseExample() != null && !endpoint.getResponseExample().isEmpty()) {
                         String indentedJson = indentJson(endpoint.getResponseExample(), "    ");
                         sb.append("  ```json\n").append(indentedJson).append("\n  ```\n");
+                    }
+                    // Field descriptions
+                    if (endpoint.getResponseBodyFields() != null && !endpoint.getResponseBodyFields().isEmpty()) {
+                        sb.append("  **Fields:**\n");
+                        for (ParameterInfo field : endpoint.getResponseBodyFields()) {
+                            sb.append("  - `").append(field.getName()).append("`")
+                                    .append(" (").append(field.getType() != null ? field.getType() : "?").append(")");
+                            if (field.getDescription() != null && !field.getDescription().isEmpty()) {
+                                sb.append(" - ").append(field.getDescription());
+                            }
+                            if (field.getExample() != null && !field.getExample().isEmpty()) {
+                                sb.append(" (e.g. `").append(field.getExample()).append("`)");
+                            }
+                            sb.append("\n");
+                        }
                     }
                 }
 

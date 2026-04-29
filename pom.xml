@@ -16,6 +16,7 @@
         <module>swagger2md-core</module>
         <module>swagger2md-spring-boot-starter</module>
         <module>swagger2md-demo</module>
+        <module>swagger2md-demo-standalone</module>
     </modules>
 
     <properties>

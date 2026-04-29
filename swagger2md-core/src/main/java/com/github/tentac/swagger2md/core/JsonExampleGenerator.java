@@ -1,5 +1,7 @@
 package com.github.tentac.swagger2md.core;
 
+import com.github.tentac.swagger2md.model.ParameterInfo;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -247,8 +249,103 @@ public class JsonExampleGenerator {
     }
 
     /**
-     * Get all declared fields including inherited ones.
+     * Extract field descriptions from @ApiModelProperty annotations on the given class.
+     *
+     * @param clazz the model class to introspect
+     * @return list of field descriptions (name, type, description, required, example)
      */
+    public List<ParameterInfo> extractFieldDescriptions(Class<?> clazz) {
+        if (clazz == null || isSimpleType(clazz)) return Collections.emptyList();
+        List<ParameterInfo> fields = new ArrayList<>();
+        List<Field> allFields = getAllFields(clazz);
+        for (Field field : allFields) {
+            if (java.lang.reflect.Modifier.isStatic(field.getModifiers())
+                    || java.lang.reflect.Modifier.isTransient(field.getModifiers())
+                    || field.isSynthetic()) {
+                continue;
+            }
+            ParameterInfo info = new ParameterInfo();
+            info.setName(getFieldName(field));
+            info.setType(field.getType().getSimpleName());
+            info.setIn("body");
+            // Try @ApiModelProperty
+            extractSwaggerFieldAnnotation(field, info);
+            fields.add(info);
+        }
+        return fields;
+    }
+
+    private void extractSwaggerFieldAnnotation(Field field, ParameterInfo info) {
+        // Try @MarkdownApiModelProperty (standalone, always available)
+        try {
+            com.github.tentac.swagger2md.annotation.MarkdownApiModelProperty mdProp =
+                    field.getAnnotation(com.github.tentac.swagger2md.annotation.MarkdownApiModelProperty.class);
+            if (mdProp != null) {
+                if (!mdProp.value().isEmpty()) {
+                    info.setDescription(mdProp.value());
+                }
+                info.setRequired(mdProp.required());
+                if (!mdProp.example().isEmpty()) {
+                    info.setExample(mdProp.example());
+                }
+                if (!mdProp.notes().isEmpty() && info.getDescription() == null) {
+                    info.setDescription(mdProp.notes());
+                }
+                return;
+            }
+        } catch (Exception ignored) {
+        }
+
+        // Try @ApiModelProperty (Swagger2, optional)
+        try {
+            Class<?> apiModelPropClass = Class.forName("io.swagger.annotations.ApiModelProperty");
+            for (java.lang.annotation.Annotation annotation : field.getAnnotations()) {
+                if (apiModelPropClass.isInstance(annotation)) {
+                    java.lang.reflect.Method valueMethod = apiModelPropClass.getMethod("value");
+                    String value = (String) valueMethod.invoke(annotation);
+                    if (value != null && !value.isEmpty()) {
+                        info.setDescription(value);
+                    }
+                    try {
+                        java.lang.reflect.Method requiredMethod = apiModelPropClass.getMethod("required");
+                        Boolean required = (Boolean) requiredMethod.invoke(annotation);
+                        if (required != null) info.setRequired(required);
+                    } catch (NoSuchMethodException ignored2) {}
+                    try {
+                        java.lang.reflect.Method exampleMethod = apiModelPropClass.getMethod("example");
+                        String example = (String) exampleMethod.invoke(annotation);
+                        if (example != null && !example.isEmpty()) info.setExample(example);
+                    } catch (NoSuchMethodException ignored2) {}
+                    try {
+                        java.lang.reflect.Method notesMethod = apiModelPropClass.getMethod("notes");
+                        String notes = (String) notesMethod.invoke(annotation);
+                        if (notes != null && !notes.isEmpty()) info.setDescription(notes);
+                    } catch (NoSuchMethodException ignored2) {}
+                    break;
+                }
+            }
+        } catch (Exception ignored) {
+        }
+    }
+
+    /**
+     * Get the element type from a generic return type like List&lt;User&gt;.
+     */
+    public Class<?> getElementType(Type type) {
+        if (type instanceof ParameterizedType paramType) {
+            Type rawType = paramType.getRawType();
+            if (rawType instanceof Class<?> rawClass && Collection.class.isAssignableFrom(rawClass)) {
+                Type[] typeArgs = paramType.getActualTypeArguments();
+                if (typeArgs.length > 0 && typeArgs[0] instanceof Class<?> elementClass) {
+                    return elementClass;
+                }
+            }
+        }
+        if (type instanceof Class<?> clazz) {
+            return clazz;
+        }
+        return null;
+    }
     private List<Field> getAllFields(Class<?> clazz) {
         List<Field> fields = new ArrayList<>();
         Class<?> current = clazz;
