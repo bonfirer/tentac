@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.github.tentac</groupId>
+        <groupId>com.github.bonfirer</groupId>
         <artifactId>tentac-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
@@ -18,7 +18,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.github.tentac</groupId>
+            <groupId>com.github.bonfirer</groupId>
             <artifactId>tentac-spring-boot-starter</artifactId>
         </dependency>
         <dependency>
