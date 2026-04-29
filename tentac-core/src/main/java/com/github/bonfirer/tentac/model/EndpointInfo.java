@@ -1,4 +1,4 @@
-package com.github.tentac.model;
+package com.github.bonfirer.tentac.model;
 
 import java.util.ArrayList;
 import java.util.List;

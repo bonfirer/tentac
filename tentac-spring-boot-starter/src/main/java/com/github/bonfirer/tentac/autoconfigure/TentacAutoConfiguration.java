@@ -1,8 +1,8 @@
-package com.github.tentac.autoconfigure;
+package com.github.bonfirer.tentac.autoconfigure;
 
-import com.github.tentac.core.MarkdownGenerator;
-import com.github.tentac.filter.IpAccessFilter;
-import com.github.tentac.probe.LlmProbeGenerator;
+import com.github.bonfirer.tentac.core.MarkdownGenerator;
+import com.github.bonfirer.tentac.filter.IpAccessFilter;
+import com.github.bonfirer.tentac.probe.LlmProbeGenerator;
 
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

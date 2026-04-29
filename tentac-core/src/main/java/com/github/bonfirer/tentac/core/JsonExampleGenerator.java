@@ -1,6 +1,6 @@
-package com.github.tentac.core;
+package com.github.bonfirer.tentac.core;
 
-import com.github.tentac.model.ParameterInfo;
+import com.github.bonfirer.tentac.model.ParameterInfo;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
@@ -278,8 +278,8 @@ public class JsonExampleGenerator {
     private void extractSwaggerFieldAnnotation(Field field, ParameterInfo info) {
         // Try @MarkdownApiModelProperty (standalone, always available)
         try {
-            com.github.tentac.annotation.MarkdownApiModelProperty mdProp =
-                    field.getAnnotation(com.github.tentac.annotation.MarkdownApiModelProperty.class);
+            com.github.bonfirer.tentac.annotation.MarkdownApiModelProperty mdProp =
+                    field.getAnnotation(com.github.bonfirer.tentac.annotation.MarkdownApiModelProperty.class);
             if (mdProp != null) {
                 if (!mdProp.value().isEmpty()) {
                     info.setDescription(mdProp.value());

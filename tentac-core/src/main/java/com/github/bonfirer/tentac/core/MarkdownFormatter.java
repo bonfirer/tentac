@@ -1,7 +1,7 @@
-package com.github.tentac.core;
+package com.github.bonfirer.tentac.core;
 
-import com.github.tentac.model.EndpointInfo;
-import com.github.tentac.model.ParameterInfo;
+import com.github.bonfirer.tentac.model.EndpointInfo;
+import com.github.bonfirer.tentac.model.ParameterInfo;
 
 import java.util.List;
 

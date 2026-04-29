@@ -1,10 +1,10 @@
-package com.github.tentac.core;
+package com.github.bonfirer.tentac.core;
 
-import com.github.tentac.annotation.MarkdownApi;
-import com.github.tentac.annotation.MarkdownApiOperation;
-import com.github.tentac.annotation.MarkdownApiParam;
-import com.github.tentac.model.EndpointInfo;
-import com.github.tentac.model.ParameterInfo;
+import com.github.bonfirer.tentac.annotation.MarkdownApi;
+import com.github.bonfirer.tentac.annotation.MarkdownApiOperation;
+import com.github.bonfirer.tentac.annotation.MarkdownApiParam;
+import com.github.bonfirer.tentac.model.EndpointInfo;
+import com.github.bonfirer.tentac.model.ParameterInfo;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;

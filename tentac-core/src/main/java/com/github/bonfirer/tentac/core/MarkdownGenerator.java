@@ -1,6 +1,6 @@
-package com.github.tentac.core;
+package com.github.bonfirer.tentac.core;
 
-import com.github.tentac.model.EndpointInfo;
+import com.github.bonfirer.tentac.model.EndpointInfo;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -70,8 +70,8 @@ public class MarkdownGenerator {
             }
 
             // Check if hidden via @MarkdownApi
-            com.github.tentac.annotation.MarkdownApi mdApi =
-                    controllerClass.getAnnotation(com.github.tentac.annotation.MarkdownApi.class);
+            com.github.bonfirer.tentac.annotation.MarkdownApi mdApi =
+                    controllerClass.getAnnotation(com.github.bonfirer.tentac.annotation.MarkdownApi.class);
             if (mdApi != null && mdApi.hidden()) {
                 continue;
             }
@@ -122,8 +122,8 @@ public class MarkdownGenerator {
                 continue;
             }
 
-            com.github.tentac.annotation.MarkdownApi mdApi =
-                    controllerClass.getAnnotation(com.github.tentac.annotation.MarkdownApi.class);
+            com.github.bonfirer.tentac.annotation.MarkdownApi mdApi =
+                    controllerClass.getAnnotation(com.github.bonfirer.tentac.annotation.MarkdownApi.class);
             if (mdApi != null && mdApi.hidden()) continue;
 
             String basePath = scanner.getBasePath(controllerClass);

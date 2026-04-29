@@ -10,7 +10,7 @@ tentac:
   title: "Tentac Demo API"
   description: "A demo API showcasing Markdown-format documentation generation with Swagger2 compatibility"
   version: "1.0.0"
-  base-package: "com.github.tentac.demo"
+  base-package: "com.github.bonfirer.tentac.demo"
   markdown-path: "/v2/markdown"
   llm-probe-path: "/v2/llm-probe"
   llm-probe-enabled: true
@@ -25,4 +25,4 @@ tentac:
 
 logging:
   level:
-    com.github.tentac.tentac: DEBUG
+    com.github.bonfirer.tentac.tentac: DEBUG

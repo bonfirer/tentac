@@ -1,8 +1,8 @@
-package com.github.tentac.demo.controller;
+package com.github.bonfirer.tentac.demo.controller;
 
-import com.github.tentac.annotation.MarkdownApi;
-import com.github.tentac.annotation.MarkdownApiOperation;
-import com.github.tentac.annotation.MarkdownApiParam;
+import com.github.bonfirer.tentac.annotation.MarkdownApi;
+import com.github.bonfirer.tentac.annotation.MarkdownApiOperation;
+import com.github.bonfirer.tentac.annotation.MarkdownApiParam;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

@@ -1,4 +1,4 @@
-package com.github.tentac.autoconfigure;
+package com.github.bonfirer.tentac.autoconfigure;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

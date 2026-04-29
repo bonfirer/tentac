@@ -1,4 +1,4 @@
-package com.github.tentac.model;
+package com.github.bonfirer.tentac.model;
 
 /**
  * Represents a response definition for an API endpoint.

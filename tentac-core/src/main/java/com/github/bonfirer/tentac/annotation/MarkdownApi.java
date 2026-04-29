@@ -1,4 +1,4 @@
-package com.github.tentac.annotation;
+package com.github.bonfirer.tentac.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

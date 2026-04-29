@@ -1,6 +1,6 @@
-package com.github.tentac.demo.standalone.controller;
+package com.github.bonfirer.tentac.demo.standalone.controller;
 
-import com.github.tentac.annotation.*;
+import com.github.bonfirer.tentac.annotation.*;
 
 import org.springframework.web.bind.annotation.*;
 

@@ -1,7 +1,7 @@
-package com.github.tentac.core;
+package com.github.bonfirer.tentac.core;
 
-import com.github.tentac.model.EndpointInfo;
-import com.github.tentac.model.ParameterInfo;
+import com.github.bonfirer.tentac.model.EndpointInfo;
+import com.github.bonfirer.tentac.model.ParameterInfo;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -118,8 +118,8 @@ public class ApiScanner {
         }
 
         // Try custom @MarkdownApi annotation
-        com.github.tentac.annotation.MarkdownApi mdApi =
-                controllerClass.getAnnotation(com.github.tentac.annotation.MarkdownApi.class);
+        com.github.bonfirer.tentac.annotation.MarkdownApi mdApi =
+                controllerClass.getAnnotation(com.github.bonfirer.tentac.annotation.MarkdownApi.class);
         if (mdApi != null && mdApi.tags().length > 0) {
             for (String tag : mdApi.tags()) {
                 if (tag != null && !tag.isEmpty() && !tags.contains(tag)) {
@@ -152,8 +152,8 @@ public class ApiScanner {
         }
 
         // Try custom @MarkdownApi
-        com.github.tentac.annotation.MarkdownApi mdApi =
-                controllerClass.getAnnotation(com.github.tentac.annotation.MarkdownApi.class);
+        com.github.bonfirer.tentac.annotation.MarkdownApi mdApi =
+                controllerClass.getAnnotation(com.github.bonfirer.tentac.annotation.MarkdownApi.class);
         if (mdApi != null && !mdApi.description().isEmpty()) {
             return mdApi.description();
         }

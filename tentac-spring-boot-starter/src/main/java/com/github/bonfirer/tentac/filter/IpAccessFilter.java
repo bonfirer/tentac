@@ -1,4 +1,4 @@
-package com.github.tentac.filter;
+package com.github.bonfirer.tentac.filter;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

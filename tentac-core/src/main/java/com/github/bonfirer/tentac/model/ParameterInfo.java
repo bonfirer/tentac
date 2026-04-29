@@ -1,4 +1,4 @@
-package com.github.tentac.model;
+package com.github.bonfirer.tentac.model;
 
 /**
  * Represents a request parameter for an API endpoint.
