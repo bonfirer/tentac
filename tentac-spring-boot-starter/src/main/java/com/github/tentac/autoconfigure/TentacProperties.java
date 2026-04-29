@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * Configuration properties for Tentac.
- * Prefix: swagger2md
+ * Prefix: tentac
  */
 @ConfigurationProperties(prefix = "tentac")
 public class TentacProperties {

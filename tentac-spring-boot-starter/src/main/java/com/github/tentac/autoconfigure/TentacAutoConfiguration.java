@@ -38,7 +38,7 @@ public class TentacAutoConfiguration {
     }
 
     @Bean
-    public TentacEndpoint swagger2mdEndpoint(TentacProperties properties,
+    public TentacEndpoint tentacEndpoint(TentacProperties properties,
                                                   MarkdownGenerator generator,
                                                   LlmProbeGenerator probeGenerator,
                                                   org.springframework.context.ApplicationContext applicationContext) {
@@ -68,7 +68,7 @@ public class TentacAutoConfiguration {
         registration.setFilter(filter);
         registration.setOrder(1);
 
-        // Apply to swagger2md documentation paths
+        // Apply to tentac documentation paths
         registration.addUrlPatterns(
                 properties.getMarkdownPath(),
                 properties.getMarkdownPath() + "/*",
